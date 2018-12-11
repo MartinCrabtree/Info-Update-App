@@ -1,0 +1,23 @@
+// At top of file
+#import "BugReportDoc.h"
+#import "BugReportData.h"
+
+// After @implementation
+@synthesize bugs = _bugs;
+
+// At the end of viewDidLoad
+self.title = @"Scary Bugs";
+
+// Replace the return statement in tableView:numberOfRowsInSection with the following:
+return _bugs.count;
+
+// Replace tableView:cellForRowAtIndexPath with the following
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  UITableViewCell *cell = [tableView
+               dequeueReusableCellWithIdentifier:@"MyBasicCell"];
+  RWTScaryBugDoc *bug = [self.bugs objectAtIndex:indexPath.row];
+  cell.textLabel.text = bug.data.title;
+  cell.imageView.image = bug.thumbImage;
+  return cell;
+}
